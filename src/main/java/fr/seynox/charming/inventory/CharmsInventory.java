@@ -4,12 +4,16 @@ import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtList;
+import net.minecraft.util.Identifier;
+
+import static fr.seynox.charming.CharmingMod.MOD_ID;
 
 public class CharmsInventory extends SimpleInventory {
 
+    public static final Identifier ID = new Identifier(MOD_ID, "charm_inventory");
     public static final String NBT_KEY = "CharmingCharms";
 
-    private static final int INVENTORY_SIZE = 6;
+    public static final int INVENTORY_SIZE = 6;
 
     public CharmsInventory() {
         super(INVENTORY_SIZE);
