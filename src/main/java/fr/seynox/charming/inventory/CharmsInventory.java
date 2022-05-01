@@ -1,5 +1,6 @@
 package fr.seynox.charming.inventory;
 
+import fr.seynox.charming.items.Charm;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
@@ -17,6 +18,12 @@ public class CharmsInventory extends SimpleInventory {
 
     public CharmsInventory() {
         super(INVENTORY_SIZE);
+    }
+
+    @Override
+    public boolean isValid(int slot, ItemStack stack) {
+        boolean isCharm = stack.getItem() instanceof Charm;
+        return isCharm && super.isValid(slot, stack);
     }
 
     @Override
