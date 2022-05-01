@@ -4,7 +4,8 @@
   "package": "fr.seynox.charming.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "PlayerEntityMixin"
+    "PlayerEntityMixin",
+    "LivingEntityMixin"
   ],
   "client": [],
   "server": [

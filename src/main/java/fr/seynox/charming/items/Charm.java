@@ -1,7 +1,9 @@
 package fr.seynox.charming.items;
 
+import fr.seynox.charming.CharmingMod;
 import fr.seynox.charming.inventory.CharmsInventory;
 import fr.seynox.charming.inventory.ICharmStorage;
+import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -13,6 +15,12 @@ public class Charm extends Item {
 
     public Charm(Settings settings) {
         super(settings);
+    }
+
+    public Charm() {
+        this(new FabricItemSettings()
+                .maxCount(1)
+                .group(CharmingMod.CHARMS_TAB));
     }
 
     @Override

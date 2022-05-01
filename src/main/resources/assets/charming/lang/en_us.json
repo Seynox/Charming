@@ -1,6 +1,9 @@
 {
+  "itemGroup.charming.charming": "Charming",
   "category.charming.menu": "Charming Menu",
   "key.charming.inventory": "Open Charms Inventory",
-  "name.charming.inventory.title": "Equipped Charms"
+  "name.charming.inventory.title": "Equipped Charms",
+
+  "item.charming.anvil_charm": "Anvil Charm"
 
 }
