@@ -6,6 +6,7 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -31,6 +32,13 @@ public abstract class PlayerEntityMixin extends LivingEntity implements ICharmSt
     @Override
     public void setCharmsInventory(CharmsInventory charmsInventory) {
         this.charmsInventory = charmsInventory;
+    }
+
+    @Inject(method = "dropInventory", at = @At("RETURN"))
+    public void dropInventory(CallbackInfo info) {
+        if(!this.world.getGameRules().getBoolean(GameRules.KEEP_INVENTORY)) {
+            this.charmsInventory.dropAll(this);
+        }
     }
 
     // NBT Serialization/Deserialization

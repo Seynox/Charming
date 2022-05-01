@@ -1,11 +1,15 @@
 package fr.seynox.charming.inventory;
 
 import fr.seynox.charming.items.Charm;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtList;
 import net.minecraft.util.Identifier;
+
+import java.util.Set;
 
 import static fr.seynox.charming.CharmingMod.MOD_ID;
 
@@ -20,10 +24,38 @@ public class CharmsInventory extends SimpleInventory {
         super(INVENTORY_SIZE);
     }
 
+    public void dropAll(LivingEntity entity) {
+        for(int i = 0; i < this.size(); ++i) {
+            ItemStack stack = this.getStack(i);
+
+            if(stack.isEmpty()) {
+                continue;
+            }
+
+            if(entity instanceof PlayerEntity player) {
+                player.dropItem(stack, true, false);
+            } else {
+                entity.dropStack(stack);
+            }
+
+            this.removeStack(i);
+        }
+    }
+
+    @Override
+    public boolean canInsert(ItemStack stack) {
+        boolean isCharm = stack.getItem() instanceof Charm;
+        boolean alreadyEquipped = containsAny(Set.of(stack.getItem()));
+
+        return isCharm && !alreadyEquipped && super.canInsert(stack);
+    }
+
     @Override
     public boolean isValid(int slot, ItemStack stack) {
         boolean isCharm = stack.getItem() instanceof Charm;
-        return isCharm && super.isValid(slot, stack);
+        boolean alreadyEquipped = containsAny(Set.of(stack.getItem()));
+
+        return isCharm && !alreadyEquipped && super.isValid(slot, stack);
     }
 
     @Override
