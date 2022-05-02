@@ -1,7 +1,6 @@
-package fr.seynox.charming.services;
+package fr.seynox.charming.network;
 
 import fr.seynox.charming.inventory.gui.CharmsScreenHandler;
-import fr.seynox.charming.network.PacketsConstants;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.minecraft.screen.SimpleNamedScreenHandlerFactory;
@@ -13,12 +12,12 @@ import net.minecraft.text.TranslatableText;
 import static fr.seynox.charming.CharmingMod.LOGGER;
 import static fr.seynox.charming.CharmingMod.MOD_ID;
 
-public class CharmMenuService {
+public class CharmsInventoryPacketHandler {
 
-    private CharmMenuService() {}
+    private CharmsInventoryPacketHandler() {}
 
-    public static void toggleCharmMenu() {
-        LOGGER.debug("Toggling charm menu");
+    public static void sendOpenCharmsInventoryPacket() {
+        LOGGER.debug("Sending charms inventory packet");
         ClientPlayNetworking.send(PacketsConstants.CHARMS_INVENTORY_PACKET_ID, PacketByteBufs.empty());
     }
 

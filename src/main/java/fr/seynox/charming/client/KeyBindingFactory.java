@@ -1,4 +1,4 @@
-package fr.seynox.charming.factories;
+package fr.seynox.charming.client;
 
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.minecraft.client.option.KeyBinding;

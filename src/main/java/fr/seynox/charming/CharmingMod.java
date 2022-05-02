@@ -5,7 +5,7 @@ import fr.seynox.charming.inventory.gui.CharmsScreenHandler;
 import fr.seynox.charming.items.AnvilCharm;
 import fr.seynox.charming.items.CharmingItems;
 import fr.seynox.charming.network.PacketsConstants;
-import fr.seynox.charming.services.CharmMenuService;
+import fr.seynox.charming.network.CharmsInventoryPacketHandler;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
@@ -29,11 +29,7 @@ public class CharmingMod implements ModInitializer {
 			() -> new ItemStack(Items.AIR)
 	);
 
-	public static final ScreenHandlerType<CharmsScreenHandler> CHARMS_SCREEN_HANDLER_TYPE;
-
-	static {
-		CHARMS_SCREEN_HANDLER_TYPE = ScreenHandlerRegistry.registerSimple(CharmsInventory.ID, CharmsScreenHandler::new);
-	}
+	public static final ScreenHandlerType<CharmsScreenHandler> CHARMS_SCREEN_HANDLER_TYPE = ScreenHandlerRegistry.registerSimple(CharmsInventory.ID, CharmsScreenHandler::new);
 
 	@Override
 	public void onInitialize() {
@@ -46,7 +42,7 @@ public class CharmingMod implements ModInitializer {
 	public void initializePacketListeners() {
 		ServerPlayNetworking.registerGlobalReceiver(
 				PacketsConstants.CHARMS_INVENTORY_PACKET_ID,
-				(server, player, handler, buf, responseSender) -> CharmMenuService.onCharmsInventoryPacket(server, player));
+				(server, player, handler, buf, responseSender) -> CharmsInventoryPacketHandler.onCharmsInventoryPacket(server, player));
 	}
 
 	public void initializeItems() {

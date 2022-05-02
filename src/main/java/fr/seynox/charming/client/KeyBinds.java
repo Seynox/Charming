@@ -1,7 +1,6 @@
 package fr.seynox.charming.client;
 
-import fr.seynox.charming.factories.KeyBindingFactory;
-import fr.seynox.charming.services.CharmMenuService;
+import fr.seynox.charming.network.CharmsInventoryPacketHandler;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.option.KeyBinding;
@@ -21,7 +20,7 @@ public class KeyBinds {
         LOGGER.info("Registering keybindings");
 
         keyBindingAndActionMap = Map.of(
-                KeyBindingFactory.createAndRegister("inventory", GLFW_KEY_G, "menu"), CharmMenuService::toggleCharmMenu
+                KeyBindingFactory.createAndRegister("inventory", GLFW_KEY_G, "menu"), CharmsInventoryPacketHandler::sendOpenCharmsInventoryPacket
         );
 
         ClientTickEvents.END_CLIENT_TICK.register(KeyBinds::onKeyPress);
