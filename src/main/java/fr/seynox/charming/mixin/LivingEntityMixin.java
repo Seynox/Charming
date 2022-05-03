@@ -20,7 +20,8 @@ public abstract class LivingEntityMixin extends Entity {
 
     @ModifyArgs(method = "damage", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/LivingEntity;takeKnockback(DDD)V"))
     public void onDamageKnockback(Args args, DamageSource source, float amount) {
-        AnvilCharm.onKnockback(this, args);
+        double newKnockbackStrength = AnvilCharm.onKnockback((LivingEntity) (Object) this, args.get(0));
+        args.set(0, newKnockbackStrength);
     }
 
 }
